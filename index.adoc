@@ -3,7 +3,8 @@
 petrus <f4inu@tuta.io>
 12, 2024-02-15: Asciidoc rewrite
 
-## link:f4inu/[About me. Copy of QRZ.com page]
+## link:f4inu/[About me]
+Copy of my qrz.com page.
 
 
 ## link:adsb/[ADS-B ground plane antenna]
@@ -48,5 +49,4 @@ Bidouilles pour radios Icom
 
 ## link:anytone/[Anytone PTT]
 2023-03-27
-
 Utilisation d'un bouton Bluetooth PTT Anytone BP-02 avec un ordi
