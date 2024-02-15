@@ -1,29 +1,52 @@
 # F4INU ham radio projects and notes
-
+:toc:
 petrus <f4inu@tuta.io>
 12, 2024-02-15: Asciidoc rewrite
 
-:toc:
+## link:f4inu/[About me. Copy of QRZ.com page]
 
-## ADS-B ground plane antenna
 
-## Exploring Inmarsat BGAN
+## link:adsb/[ADS-B ground plane antenna]
+2015-09-07
+Construction d'une ground plane 1090MHz pour réception ads-b.
 
-## Mast spike mount
+## link:inmarsat/[Exploring Inmarsat BGAN]
+2019-07-14
+Exploration d'un terminal BGAN Inmarsat Thrane & Thrane Explorer 700
 
-## Magloop
+## link:pied/[Mast spike mount]
+2020-09-26
+Bricolage d'un pied de mat d'antenne
 
-## WSJT-X
+## link:magloop/[Magloop]
+2020-11-08
+Construction d'une antenne magloop
 
-## USB & udev
+## link:wsjtx/[WSJT-X]
+2020-11-13
+Réception FT8 avec WSJT-X et SDR
 
-## Ghetto-Squalo
+## link:usb/[USB & udev]
+2021-06-07
+Règles udev pour éviter la confusion entre multiples périphériques
 
-## Solar
+## link:ghetto-squalo/[Ghetto-Squalo]
+2022-05-06
+Dipole filaire replié entre halo et cobweb
 
-## DOWaP
+## link:solar/[Solar]
+2022-08-15
+Alimentation solaire
 
-## Icom
+## link:dowap/[DOWaP]
+2022-09-19
+Days Operating Without any Power
 
-## Anytone PTT
+## link:icom/[Icom]
+2022-11-06
+Bidouilles pour radios Icom
 
+## link:anytone/[Anytone PTT]
+2023-03-27
+
+Utilisation d'un bouton Bluetooth PTT Anytone BP-02 avec un ordi
