@@ -1,0 +1,29 @@
+# F4INU ham radio projects and notes
+
+petrus <f4inu@tuta.io>
+12, 2024-02-15: Asciidoc rewrite
+
+:toc:
+
+## ADS-B ground plane antenna
+
+## Exploring Inmarsat BGAN
+
+## Mast spike mount
+
+## Magloop
+
+## WSJT-X
+
+## USB & udev
+
+## Ghetto-Squalo
+
+## Solar
+
+## DOWaP
+
+## Icom
+
+## Anytone PTT
+
