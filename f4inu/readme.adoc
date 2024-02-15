@@ -1,0 +1,66 @@
+# About me
+
+General geek, passionate about technology, networking and security.
+
+Always had an interest in radio communications. Grew up with walkie-talkies and short wave radios, had a CB radio in my car as soon as I had my driving license, more for listening than actually transmitting.
+
+Built my first (c)antennas during the craze of community wireless with flashed wrt54g.
+
+RTL-SDRs then reintroduced me progressively to radio world.
+
+Licenced march 2020, just before covid lockdown #1.
+
+I like tinkering more than making QSOs, contributing to opensource ham software, building various antennas…
+
+
+## QTH
+
+Saint Aubin du Cormier in Brittany, France. Gridsquare IN98hg, 50km south-east of Mont-Saint-Michel.
+
+Founded 800 years ago, Saint Aubin du Cormier was home of a famous battle between French and Bretons, whose defeat precipitated the end of the independence of Brittany from France.
+
+
+## The shack radios
+
+    Icom IC-706 MkIIg with CR-282 and digirig
+    Icom IC-7200 (fantastic rugged radio)
+    Hermes Lite 2 SDR (network sdr, openhpsdr architecture)
+    Airspy HF+ Discovery (Rx-only usb SDR)
+
+## Mobile radios
+
+    Retevis RT95
+    RCI 2950
+
+## Talkies
+
+    Icom F4GT (UHF only)
+    Anytone AT-D878UV+
+    TYT UV88
+    Quansheng UV-K5
+
+## Antennas
+### HF
+
+    Tagra F3 10/11m 5/8 vertical
+    40m to 10m homebrew magloop
+    Hustler mobile with 80/40/20/15/10 coils.
+    Various temporary wire antennas, efhw, tl2t sleeve dipole, square halo…
+
+### VHF / UHF
+
+    6m sleeve dipole
+    6m delta loop
+    Diamond x500
+    2m/70cm square halo
+    13cm cantenna
+
+### SHF
+
+    Various repurposed for 6cm (hamnet) WiFi antennas, mostly patch and omnis.
+
+### Mobile
+
+    Diamond SG-7700 for 2m & 70cm
+    K40 for 10m
+
