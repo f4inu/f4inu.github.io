@@ -1,6 +1,6 @@
 # Reception ADS-B
 :toc:
-:stylesheet: ../stylesheet.css
+:stylesheet: ../boot-slate.css
 
 ## Construction de l'antenne
 
