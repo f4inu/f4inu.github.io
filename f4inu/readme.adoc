@@ -1,4 +1,5 @@
 # About me
+:stylesheet: ../stylesheet.css
 
 General geek, passionate about technology, networking and security.
 

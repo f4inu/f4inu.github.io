@@ -1,5 +1,6 @@
 # F4INU ham radio projects and notes
 :toc:
+:stylesheet: stylesheet.css
 petrus <f4inu@tuta.io>
 12, 2024-02-15: Asciidoc rewrite
 
