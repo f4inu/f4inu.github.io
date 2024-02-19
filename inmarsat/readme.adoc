@@ -640,4 +640,4 @@ The `lua` forlder contains some useful files used on the system:
 	104           0x68            gzip compressed data, maximum compression, has original file name: "tt3720.ah-3_09-0001-tt3720.bin", from Unix, last modified: 2015-09-04 07:05:54
 ----
 
-Unfortunately binwalk is unable to extract the files contained in link:tt3720.ah-3_09-0001-tt3720.bin.txt[tt3720.ah-3_09-0001-tt3720.bin].
+Unfortunately binwalk is unable to extract the files contained in link:tt3720.ah-3_09-0001-tt3720.bin_files.txt[tt3720.ah-3_09-0001-tt3720.bin].    
