@@ -1,0 +1,118 @@
+# Regles udev pour radio USB
+:toc:
+:stylesheet: ../boot-slate.css
+
+## Règles USB pour multiples transceivers basés sur le même chip
+
+### Le problème
+
+
+Le soucis : il n'existe pas tant de chipsets usb-to-ttl que ça, et plusieurs
+transveivers, même différents, peuvent se retrouver avec le même vendor ID et
+product ID vu de l'ordinateur.
+
+Par exemple, un Icom 7200 (usb natif) et un Icom 706Mk2G (via Digirig Mobile) :
+
+[,console]
+----
+$ lsusb -d 10c4:
+Bus 001 Device 034: ID 10c4:ea60 Silicon Labs CP210x UART Bridge
+Bus 001 Device 037: ID 10c4:ea60 Silicon Labs CP210x UART Bridge
+----
+
+On se retrouve avec une soupe de ttyUSB dont le numéro va dépendre de l'ordre
+dans lequel les périphériques ont été détectés :
+
+[,console]
+----
+$ ls -l /dev/ttyUSB*
+crw-rw---- 1 root dialout 188, 0 juin   7 21:00 /dev/ttyUSB0
+crw-rw---- 1 root dialout 188, 1 juin   7 21:30 /dev/ttyUSB1
+----
+
+### Comment identifier de manière unique un chipset usb-ttl
+
+`udevadm` est notre ami ici. Il va nous permettre d'afficher tous les attributs d'un périphérique, en espérant en trouver un qui soit unique par device, généralement le serial.
+
+Récupérons tout d'abord le path complet vers le device qui nous intéresse :
+
+  $ udevadm info -q path -n /dev/ttyUSB0
+  /devices/pci0000:00/0000:00:14.0/usb1/1-2/1-2.4/1-2.4.3/1-2.4.3.2/1-2.4.3.2:1.0/ttyUSB0/tty/ttyUSB0
+
+C'est ce path que nous allons passer à udevadm une nouvelle fois pour afficher les attributs :
+
+----
+$ udevadm info -a -p  $(udevadm info -q path -n /dev/ttyUSB1)
+looking at device
+'/devices/pci0000:00/0000:00:14.0/usb1/1-2/1-2.4/1-2.4.1/1-2.4.1.1/1-2.4.1.1.2/1-2.4.1.1.2:1.0/ttyUSB1/tty/ttyUSB1':
+KERNEL=="ttyUSB1"
+SUBSYSTEM=="tty"
+DRIVER==""
+----
+
+moui. Bon, rien de bien intéressant ici. Continuons.
+
+----
+looking at parent device
+'/devices/pci0000:00/0000:00:14.0/usb1/1-2/1-2.4/1-2.4.1/1-2.4.1.1/1-2.4.1.1.2/1-2.4.1.1.2:1.0/ttyUSB1':
+KERNELS=="ttyUSB1"
+SUBSYSTEMS=="usb-serial"
+DRIVERS=="cp210x"
+ATTRS{port_number}=="0"
+----
+
+ok, c'est le driver cp210x qui est utilisé. mais c'est le même pour `ttyUSB0`, donc pas intéressant. 
+
+----
+looking at parent device
+'/devices/pci0000:00/0000:00:14.0/usb1/1-2/1-2.4/1-2.4.1/1-2.4.1.1/1-2.4.1.1.2':
+(...)
+ATTRS{configuration}==""
+ATTRS{idVendor}=="10c4"
+ATTRS{product}=="CP2102 USB to UART Bridge Controller"
+----
+
+Mmh, est-ce que le product est différent sur `ttyUSB0` ? Regardons :
+
+  $ udevadm info -a -p  $(udevadm info -q path -n /dev/ttyUSB0) | grep product
+  ATTRS{product}=="CP2102N USB to UART Bridge Controller"
+
+Légèrement différent (CP2102N vs CP2102), mais il y a toujours risque de conflit. Cherchons si un autre attribut est mieux adapté. 
+
+  ATTRS{serial}=="IC-7200 0703085"
+
+Ah, enfin quelque chose de potable. Regardons sur ttyUSB0 s'il est bien différent :
+
+  $ udevadm info -a -p  $(udevadm info -q path -n /dev/ttyUSB0) | grep serial
+  ATTRS{serial}=="d6652ecc2557eb11a4f10559fdb0f8d5"
+
+Oui, très bien ! Nous allons donc utiliser cet attribut pour identifier de manière unique nos transceivers.
+
+### `udev` à la rescousse
+
+On peut ainsi créer les deux fichiers suivants, qui ont donc le même `idVendor` et `idProduct`, mais dont le `serial` est différent:
+
+[,console]
+----
+$ cat /etc/udev/rules.d/10-icom7200.rules
+SUBSYSTEM=="tty", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60",
+ATTRS{serial}=="IC-7200 0703085", SYMLINK+="icom7200"
+
+$ cat /etc/udev/rules.d/10-icom706.rules
+SUBSYSTEM=="tty", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60",
+ATTRS{serial}=="d6652ecc2557eb11a4f10559fdb0f8d5", SYMLINK+="icom706"
+----
+
+Ainsi, le 7200 sera utilisable en tant que `/dev/icom7200`, et le 706 respectivement sur `/dev/icom706`.
+
+Une fois ces deux fichiers créés, il faut recharger les règles udev avec `udevadm trigger`.
+
+### Resultat
+
+Une fois les règles rechargées, on peut (re)brancher les deux cordons USB pour faire apparaitre les symlinks créés par udev :
+
+  $ ls -l /dev/icom7*
+  lrwxrwxrwx 1 root root 7 juin   7 21:00 /dev/icom706 -> ttyUSB0
+  lrwxrwxrwx 1 root root 7 juin   7 21:30 /dev/icom7200 -> ttyUSB1
+
+Il est ainsi facile d'utiliser le lien symbolique plutôt qu'un `/dev/ttyUSB` qui changera à chaque utilisation.
