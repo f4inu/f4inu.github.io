@@ -1,0 +1,643 @@
+# Exploration d'un terminal Inmarsat BGAN Thrane & Thrane Explorer 700
+
+J'ai eu l'opportunité de récupérer il y a quelques années un terminal Inmarsat utilisé pour le traffic data et voix via le service BGAN.
+
+## Caractéristiques techniques de l'Explorer 700
+
+Voir site du fabricant. 
+
+## Web interface access
+
+Web interface is available at http://192.168.0.1
+
+## Cli interface / Shell
+
+### Access
+
+CLI interface is accessible on port tcp/23 (telnet). Default password is 1234:
+
+[,console]
+----
+$ telnet 192.168.0.1
+Trying 192.168.0.1...
+Connected to 192.168.0.1.
+Escape character is '^]'.
+Username: admin
+Password: 1234
+
+Welcome to the Thrane & Thrane shell
+telnet:/$
+----
+
+### Available commands
+
+`help` gives a list of link:commands.txt[available commands]:
+
+[,console]
+----
+	telnet:/$ ls /bin
+	opendir failed No such entity(2).
+
+	telnet:/$ ls /bin(tab)
+	/bin/osif                 /bin/initcallReport       /bin/slog
+	/bin/stats                /bin/pipe                 /bin/readwrite
+	/bin/queue                /bin/trace                /bin/console_set
+	/bin/console_test         /bin/fast_log             /bin/fast_log_test
+	/bin/event                /bin/imeisv               /bin/ver
+	/bin/tcpmon               /bin/pppoeOtherServiceList /bin/long_interrupt
+	/bin/disable_int          /bin/disable_sched        /bin/intcount
+	/bin/intinfo              /bin/sched                /bin/trig
+	/bin/inttt_irq            /bin/int_ckey             /bin/debughdq
+	/bin/personalize          /bin/keypad               /bin/untar
+	/bin/cd                   /bin/pwd                  /bin/mkdir
+	/bin/cat                  /bin/od                   /bin/ls
+	/bin/du                   /bin/crc32                /bin/fslock
+	/bin/gpio_set_dir         /bin/gpio_read            /bin/gpio_write
+	/bin/gpio_dump            /bin/ifcommon             /bin/usim
+	/bin/usim_debug           /bin/usb                  /bin/psu
+	/bin/display              /bin/cnav                 /bin/dm
+	/bin/dmh                  /bin/dmb                  /bin/sm
+	/bin/smh                  /bin/smb                  /bin/(
+	/bin/while                /bin/true                 /bin/not
+	/bin/repeat               /bin/sleep                /bin/msleep
+	/bin/set                  /bin/inc                  /bin/dec
+	/bin/echo                 /bin/time                 /bin/help
+	/bin/alias                /bin/idl_single_socket    /bin/idl_data
+	/bin/reset                /bin/cmdcd                /bin/cmdpwd
+	/bin/remap                /bin/remapend             /bin/regread
+	/bin/uptime               /bin/date                 /bin/ps
+	/bin/nice                 /bin/memload              /bin/mem
+	/bin/chain                /bin/pci_probe            /bin/top
+	/bin/connectionmaintenance /bin/distdist             /bin/timesync
+	/bin/lua                  /bin/lua_script_dump      /bin/location
+	/bin/passwd               /bin/su                   /bin/edit
+	/bin/dl                   /bin/download             /bin/imageinfo
+	/bin/sysconf              /bin/bootloader           /bin/at
+----
+
+### Version
+
+[,console]
+----
+	telnet:/$ ver
+	Software       : 3.04, build Build-tt3720_ae-10, UTC Fri Oct 01 10:36:51 2010
+	eCos TT3710A HAL version 0.80 (eCos for Monroe Main Application compiled Aug 10 2009, 12:23:40) running at 168.002 MHz
+	BBIC01 ID      : 128, Rev 1.1 (ASIC-B)
+	Bluetooth SIW Appl:     Release 3.00.0 (Build 3008) [PF=3500 ROM BB=3000 LMP=3000 CFG=EE]
+	Bluetooth SIW Boot: Application In ROM
+	Product ID     : 2
+	Product name   : EXPLORER 700
+	PSU AVR Bootl. : 1.01
+	PSU AVR Appl.  : 1.09
+	Antenna FPGA   : 18
+	Antenna AVR    : 23
+	Antenna PCB    : 318190321
+	Antenna BOM    : 0b.05
+	CPLD           : 1.1
+	CPLD - disp    : 1.02
+	CPLD - clk     : 1.04
+	Platform ID    : 1
+	Bootloader     : 5.00 build 763-1168425312
+	BOM            : 0B15
+	TX, Post       : 1.12, build 15, UTC Tue Feb 23 15:05:58 2010
+	TX, Calibration: 1.12, build 15, UTC Tue Feb 23 15:05:54 2010
+	TX, Main       : 1.12, build 15, UTC Tue Feb 23 15:05:44 2010
+	CPLD - TX      : 9.00
+	VC, Main       : 1.12, build 15, UTC Tue Feb 23 15:06:03 2010
+	RX, Post       : 1.12, build 15, UTC Tue Feb 23 15:05:51 2010
+	RX, Calibration: 1.12, build 15, UTC Tue Feb 23 15:05:46 2010
+	RX, Main       : 1.12, build 15, UTC Tue Feb 23 15:05:38 2010
+	CPLD - RX      : 6.00
+	GPS Software   : 5.00    Jan 09 2006 12:00:00
+	GPS Hardware   : 00040001, Ublox 4
+	GPS Extension0 : M4P1.1  Jan 09 2006 15:41:10
+----
+
+### Imageinfo
+[,console]
+----
+	telnet:/$ imageinfo MAIN_CPU
+	header version  : 4
+	base address    : 0x80000000
+	entry point ofs : 0x00000280
+	file crc: 826c5344 computed crc: 826c5344
+	checksum ok
+----
+
+### Privilege escalation
+
+[,console]
+----
+	telnet:/$ su root
+	key: bf2443a4d7643xxxx(censored)xxxxxxx
+	Password:
+
+	$ telnet 192.168.0.1
+	Trying 192.168.0.1...
+	Connected to 192.168.0.1.
+	Escape character is '^]'.
+	Username: root
+	key: 23060ae94e959xxxx(censored)xxxxxxx
+	Password:
+----
+
+### Processes 
+
+Some unix commands work, at least `ps` allows us to get running processes:
+
+[,console]
+----
+	telnet:/$ ps 
+	name                     address    pri  state         mem   stack   use-----
+	Idle Thread              0x80c3da28  31  Running      5366k   2048  1064  51%
+	ifcommon                 0x80d7b728  20  Sleeping        0k   3280   368  11%
+	Network alarm support    0x80d44bf0   6  Sleeping        0k   4304  1336  31%
+	Network support          0x80c43618   7  Sleeping        0k   4304  2240  52%
+	pthread.00000800         0x80d45928  15  Exited          0k   7844   312   3%
+	pool0 (telnet_shell)     0x80e36dd8  15  Running         0k  11472  4304  37%
+	pool1                    0x80e56fd8  15  Suspended       0k  11472  4648  40%
+	pool2                    0x80e57108  15  Suspended       6k  11472  4728  41%
+	pool3                    0x80e57248  15  Suspended       0k  11472   240   2%
+	pool4                    0x812a62b8  15  Suspended       0k  11472   232   2%
+	pool5                    0x812a90c0  15  Suspended       0k  11472   240   2%
+	pool6                    0x812abed8  15  Suspended       0k  11472   232   2%
+	pool7                    0x812aecf0  15  Suspended       0k  11472   240   2%
+	pool8                    0x812b1b08  15  Suspended       0k  11472   232   2%
+	pool9                    0x812b4920  15  Suspended       0k  11472   240   2%
+	tt_init                  0x812b7748   1  Exited       4755k   5328  1904  35%
+	console write            0x8129a358   3  Sleeping        0k   5328   344   6%
+	common/event_handler     0x812ba930  15  Sleeping        0k   5328  1024  19%
+	Config                   0x8135b150  15  Sleeping      168k   5328  1712  32%
+	Watchdog                 0x8135c738  19  Sleeping       12k   5328  1232  23%
+	Temperature              0x8135ddb0  14  Sleeping        0k   4304   912  21%
+	PM_ser4                  0x81365250   8  Sleeping        0k   5232   312   5%
+	DSP_Common_CTRL          0x8143c128   5  Sleeping       28k   5328  1912  35%
+	buzzer                   0x81337398  15  Sleeping        0k   2256   368  16%
+	BUZZ-3720                0x813374a8  15  Sleeping        0k   3280   368  11%
+	Paed                     0x81442058  15  Sleeping       93k   9232  1888  20%
+	SATDD                    0x81444580   5  Sleeping       49k   9424  1296  13%
+	TT3720-MODEM             0x81446b68  15  Sleeping      150k   5232  2648  50%
+	MICREL-LAN               0x814480f0  15  Running        14k   9232  2304  24%
+	WLAN                     0x8144a618  15  Sleeping       72k   7232  1280  17%
+	WLAN-DSR_HANDLER         0x8144c370  15  Sleeping        0k   4232   368   8%
+	Stat                     0x8144d510   5  Sleeping       47k   5232  1248  23%
+	ser3                     0x81455ba8   5  Sleeping        0k  21712  1184   5%
+	Alive                    0x8145b190   4  Sleeping        8k   5232  1016  19%
+	syslog                   0x814407e0  15  Sleeping        0k   5328   352   6%
+	ErrorLog                 0x814408f0   1  Sleeping       37k   5328  1512  28%
+	POST                     0x81460878  15  Sleeping        1k   5328  1232  23%
+	UMTS-SSM                 0x81461e60  15  Sleeping      100k   9424  1016  10%
+	UMTS-SS                  0x8146d240  15  Sleeping       31k   9424  1032  10%
+	UMTS-SMSM                0x8146f828  15  Sleeping      142k   9424  1880  19%
+	SMS-RL                   0x81471e10  15  Sleeping       25k   5232  1016  19%
+	SMS-CM                   0x81473398  15  Sleeping        1k   5232   872  16%
+	GW-MMI-CONF              0x81474920  15  Sleeping        1k   9424  1920  20%
+	UMTS-SM-GW               0x81476f08  15  Sleeping      182k   9424  1784  18%
+	UMTS-SM                  0x814fbb30  15  Sleeping       66k   7376  1952  26%
+	UMTS-REG                 0x81451b60  15  Sleeping       39k   5328  1368  25%
+	UMTS-MM                  0x81451cf0  15  Sleeping       72k   9424  1368  14%
+	UMTS-GMM                 0x81451e70  15  Sleeping       47k   9424  1336  14%
+	SIP_SIM                  0x81451f80  15  Sleeping       11k   9424  1040  11%
+	CSUP                     0x8145dbc0  15  Sleeping       66k   9424  1040  11%
+	UMTS-CC                  0x8145dcd0  15  Sleeping       44k   9424  1152  12%
+	stun                     0x8150af70  15  Sleeping       12k  17616  8152  46%
+	SIP starter              0x8150f558  15  Exited         40k   5328  1016  19%
+	PSM                      0x81510b40  15  Sleeping      530k   7376  1424  19%
+	pppoe/handler            0x81512c40  15  Sleeping        0k   5328  1240  23%
+	PPP                      0x81514228  15  Sleeping       74k   7376  1008  13%
+	NAT                      0x81516010  15  Sleeping        0k   3280   360  10%
+	EthUpper                 0x80b6b630  15  Sleeping       12k   7376  1016  13%
+	LANBRIDGE                0x80b69820  15  Sleeping       15k   7376   976  13%
+	DHCP                     0x81516df8  20  Sleeping        0k  11472   736   6%
+	ISDN                     0x81519be0  15  Sleeping       73k   6560  1664  25%
+	BCnprc                   0x8164bb80   5  Sleeping        0k   5328   704  13%
+	Decipherprc              0x8164d168  15  Sleeping        0k   7376   560   7%
+	BCtprc                   0x8164ef50   4  Sleeping        0k   7376  1840  24%
+	IAI2-AL_ALD              0x815018c8   5  Sleeping       20k   9424  1032  10%
+	IAI2-AL_REGM             0x815019f8   8  Sleeping      343k   9680  1680  17%
+	IAI2-AL_MMC              0x81655e28   5  Sleeping       27k   9424  1040  11%
+	lan-bt00                 0x816585b0  15  Sleeping        0k   5328   392   7%
+	BtLanPPPCommonCtrl       0x81659b98  15  Sleeping        0k   5328   552  10%
+	lan-bt01                 0x8165bdd8  15  Sleeping        0k   5328   384   7%
+	lan-bt02                 0x8165da58  15  Sleeping        0k   5328   384   7%
+	lan-bt03                 0x8165f860  15  Sleeping        0k   5328   392   7%
+	lan-bt04                 0x81661510  15  Sleeping        0k   5328   392   7%
+	lan-bt05                 0x81663190  15  Sleeping        0k   5328   392   7%
+	lan-bt06                 0x81664e48  15  Sleeping        0k   5328   384   7%
+	lan-bt07                 0x81666b00  15  Sleeping        0k   5328   392   7%
+	lan-bt08                 0x816687b8  15  Sleeping        0k   5328   384   7%
+	lan-bt09                 0x8166a470  15  Sleeping        0k   5328   392   7%
+	lan-bt10                 0x8166c128  15  Sleeping        0k   5328   384   7%
+	Bluetooth                0x8165f588  15  Sleeping       50k   5328  1592  29%
+	xavante                  0x81660e48  15  Sleeping      341k  21712  8872  40%
+	PowerCtrl                0x81660f78   3  Sleeping       21k   5328  1008  18%
+	MMI                      0x816610a8  20  Running        43k   9232  1616  17%
+	KeyPad                   0x816784b0  20  Running         0k   2256   808  35%
+	Call log                 0x81678e98  20  Sleeping        3k   3232  2056  63%
+	LUA_IF                   0x81679c50  20  Sleeping       61k   5328  2408  45%
+	USIM                     0x8167c8a8  15  Sleeping       18k   5328  1704  31%
+	SEARCH_DSP_CTRL          0x8167de90   4  Sleeping       59k   5328  1016  19%
+	PSU                      0x8167f4b0  10  Sleeping       22k   5328  1592  29%
+	HPA_IFM_STUB             0x81680a98  20  Sleeping       30k   5328  1000  18%
+	gps hardware             0x816820b8  15  Sleeping        0k   5328  1760  33%
+	ublox                    0x816836a0  15  Sleeping        0k   5328  1416  26%
+	PM_lna                   0x8166da20   8  Sleeping        0k   5232   320   6%
+	PM_tx3v3                 0x8166db50   8  Sleeping        0k   5232   320   6%
+	HAL_BPT                  0x81690c98   5  Sleeping        0k   5328  1184  22%
+	contrast                 0x81692280  20  Sleeping        0k   5328  1304  24%
+	VIRT_CS                  0x81693868  15  Sleeping       13k   5328  1040  19%
+	SLIC                     0x81694e50  15  Sleeping       14k   7376  1280  17%
+	ISDN-TA                  0x81696c38  15  Sleeping      210k   5328  1192  22%
+	PM_pci_clock             0x81698550   8  Sleeping        0k   5232   320   6%
+	CORE_HPA_CTRL            0x81699b10  15  Sleeping       30k   5328  1008  18%
+	CORE_ANT_CTRL            0x8169b130  15  Sleeping       30k   5328  1008  18%
+	CNAV                     0x8169c980  15  Sleeping        0k   5328  1352  25%
+	BATMON2019               0x8169df98  20  Sleeping       30k  17616  7456  42%
+	IDL-Orb                  0x816a25e0   8  Sleeping        1k  17616  1088   6%
+	USIM SMS-PP Download     0x816a6c60  15  Sleeping        0k   5328   384   7%
+	telnetd                  0x816a82a8  15  Sleeping        0k   5328  1800  33%
+	at telnetd               0x816a98c0  15  Sleeping        0k   5328  1808  33%
+	SAT_SEARCH               0x816aaed8  15  Sleeping       48k   5328  1336  25%
+	remote_activation        0x816ac4f0  15  Sleeping        7k   9424  1264  13%
+	reboot_timer             0x816aeb10  15  Sleeping        6k   3280  1240  37%
+	PM_psumax                0x81684f98   8  Sleeping        0k   5232   320   6%
+	PM_rxclk                 0x81685130   8  Sleeping        0k   5232   320   6%
+	PM_txclk                 0x816b2f00   8  Sleeping        0k   5232   320   6%
+	PM_vocclk                0x816b4760   8  Sleeping        0k   5232   320   6%
+	PM_ttbusup               0x816afc68   8  Sleeping        0k   5232   320   6%
+	TimeAdjuster             0x816afda8  15  Sleeping       58k   5232  1112  21%
+	PM_two_wire              0x816aff50   8  Sleeping        0k   5232   584  11%
+	PM_5v_supply             0x816ba820   8  Sleeping        0k   5232   320   6%
+	PM_ramup                 0x816bc118   8  Sleeping        0k   5232   312   5%
+	PM_mainclk               0x816b6048   8  Sleeping        0k   5232   312   5%
+	PM_rxchainup             0x816b61e8   8  Sleeping        0k   5232   312   5%
+	PM_txchainup             0x816c0d18   8  Sleeping        0k   5232   312   5%
+	PM_pcmbusup              0x816c2578   8  Sleeping        0k   5232   312   5%
+	PM.MasterThread          0x816c3b00   8  Sleeping        0k   5232   936  17%
+	PABX                     0x816c5088  15  Sleeping       49k  42192  1528   3%
+	idl-phonebook-service    0x816cf6a0  15  Sleeping        2k  17616  1288   7%
+	idl-naming-service       0x816d3cc8  15  Sleeping       15k  17616  1720   9%
+	idl-misc4-service        0x816d82e8  15  Running         2k  25808  1280   4%
+	idl-misc3-service        0x816de908  15  Running        12k  25808 17216  66%
+	idl-misc2-service        0x816e4f28  15  Sleeping        2k  17616  1280   7%
+	idl-misc-service         0x816e9548  15  Sleeping        2k  17616  1744   9%
+	LoadCtrl                 0x816edb68   3  Sleeping        0k   3280   584  17%
+	SysConf                  0x816ee980  20  Sleeping        0k   5232  1440  27%
+	BPLT cmd                 0x816eff60  15  Exited          0k   5328   952  17%
+	atCtrl                   0x816bd778  15  Sleeping        0k   5328  1208  22%
+	atTimer                  0x816bd8b8  15  Sleeping        0k   5328   496   9%
+	at-usb0                  0x8170fc50  15  Sleeping        0k  17616  2088  11%
+	at-usb1                  0x81766cc8  15  Sleeping        0k  17616  2104  11%
+	ambe test/debug          0x81766e08   5  Sleeping        0k   9232   280   3%
+	SATDD_tx                 0x8178c778   5  Sleeping        0k   9424   280   2%
+	CSUP_AL                  0x818e7098  15  Sleeping       14k   9424  1032  10%
+	VDD                      0x818e96b0  10  Sleeping       45k   5328  1320  24%
+	CSUP_SIP                 0x818edc88  15  Sleeping      131k   9424  1336  14%
+	TAPEREC                  0x818f02a0  15  Sleeping       31k   5328  1016  19%
+	pthread.00000C01         0x81903ba0  15  Sleeping      120k  16036  3760  23%
+	HDLC data forward        0x8192a9c0  15  Sleeping        0k   5328   384   7%
+	HDLC data return         0x8192ab08  15  Sleeping        0k   5328   856  16%
+	ISDN_CES3                0x819fc858  15  Sleeping        0k   6560   360   5%
+	ISDN_S3CE                0x819fe3a8  15  Sleeping        0k   6560   864  13%
+	ISDN_L2S3                0x819e1138  15  Sleeping        0k   6560   368   5%
+	ISDN_L3L2                0x819e12e0  15  Sleeping        0k   6560   360   5%
+	ISDN_LLL2                0x819992e0  15  Sleeping        0k   6560   600   9%
+	ISDN_TIMER               0x81999420  20  Running         0k   6560  1472  22%
+	PM_btchip                0x81a001d0   8  Sleeping        0k   5232   320   6%
+	PM_ser0                  0x81a005d8   8  Sleeping        0k   5232   312   5%
+	pthread.00001002         0x81a9a9c0  15  Sleeping        0k   7844   840  10%
+	pthread.00001403         0x81a9e730  15  Sleeping        2k   7844  1032  13%
+	DSP_SATRX_CTRL           0x81a9d9e8   3  Sleeping       30k   5328  1840  34%
+	DSP_SATTX_CTRL           0x81a82298   3  Sleeping       31k   5328  1848  34%
+	DSPIF_SAT_INIT           0x81a824f8   3  Exited          0k   5328  1080  20%
+	DSP_VOC_CTRL             0x81a82660   5  Sleeping       31k   5328  1840  34%
+	Voc dsp data pusher      0x81a82800   4  Sleeping        0k   5328  1480  27%
+	VDD data forward         0x81a82b50   6  Sleeping        0k  13520   384   2%
+	VDD data return          0x81ab98f0   6  Sleeping        0k   9424   376   3%
+	SIP data forward         0x81ac5f40   6  Sleeping        0k   9424   392   4%
+	SIP data return          0x81ac6070   6  Sleeping        0k   9424   328   3%
+	SIP g711 to ambe         0x81ac61b8   7  Sleeping        0k   9424   424   4%
+	SIP ambe to g711         0x81ac6320   7  Sleeping        0k   9424   408   4%
+	Taperec recv             0x81ad42b8  15  Sleeping        0k   5328   400   7%
+	Taperec send             0x81ad58b8  15  Sleeping        0k   5328  1224  22%
+	Taperec VOCDSP           0x81ad6ed8  15  Sleeping        0k   3280   352  10%
+	pthread.00001804         0x81ada1b8  15  Sleeping        0k   7844   664   8%
+	pthread.00001C05         0x81b0c900   6  Sleeping        0k   7844   960  12%
+	PM_vocup                 0x81b20f18   8  Sleeping        0k   5232  1208  23%
+	PM_vocupdev              0x81b227e0   8  Sleeping        0k   5232   936  17%
+	SMS Client callback      0x81ad3640  15  Sleeping        0k   9424   920   9%
+	idl-misc3-service-cb     0x81b279a8  15  Sleeping        0k   9424   944  10%
+	MODEM-PM                 0x81b84910  15  Sleeping        6k   3232   896  27%
+	PM_antenna               0x81b85ff0   8  Sleeping        0k   5232   312   5%
+	Modem serial rx          0x80a33810  15  Sleeping        0k   3280  1568  47%
+	Modem serial tx          0x80a33918  15  Sleeping        0k   3280  1464  44%
+	PM_txup                  0x81b84f00   8  Sleeping        0k   5232   312   5%
+	PM_txupdev               0x81b82138   8  Sleeping        0k   5232   320   6%
+	PM_rxup                  0x81b81a88   8  Sleeping        0k   5232   312   5%
+	PM_rxupdev               0x81b240f8   8  Sleeping        0k   5232   312   5%
+	Total memory allocated by processes                  14445kb
+	telnet:/$
+----
+
+### Debug cli usage:
+
+In addition to the classical telnet shell there is also a debug shell:
+
+[,console]
+----
+	$ telnet 192.168.0.1 5454
+	Trying 192.168.0.1...
+	Connected to 192.168.0.1.
+	Escape character is '^]'.
+	AT
+	OK
+	AT+CMAR=1234 < reinit avec pass admin = 1234
+	ati
+	Thrane & Thrane
+	OK
+----
+
+eCos shell is reachable from AT commands:
+
+[,console]
+----
+	AT+THRANE
+	Username: admin
+	Password: <1234>
+	Welcome to the Thrane & Thrane shell
+	atsh-pool00060000:/$
+	atsh-pool00060000:/$ pwd
+	/
+----
+
+### AT commands list
+
+[,console]
+----
+	telnet:/$ at
+	a d e h i l m n p q s t v x z 
+	&c &d &f &k &v &w 
+	+caap +cacm +caemlpp +calm +camm +caoc +cbc +cbst +ccfc +cclk +ccug +ccwa 
+	+ccwe +cdip +ceer +cfcs +cfun +cgact +cgatt +cgclass +cgcmod +cgdata +cgdcont 
+	+cgdscont +cgeqmin +cgeqneg +cgeqreq +cgerep +cgmi +cgmm +cgmr +cgpaddr 
+	+cgqmin +cgqreq +cgreg +cgsms +cgsn +cgtft +chld +chup +cimi +cind +clac +clan 
+	+clcc +clck +clip +clir +cmar +cmec +cmee +cmer +cmgc +cmgd +cmgf +cmgl +cmgr 
+	+cmgs +cmgw +cmod +cmss +cmut +cnmi +cnum +colp +copn +cops +cpas +cpbf +cpbr 
+	+cpbs +cpbw +cpin +cpls +cpms +cpol +cpps +cpuc +cpwd +cr +crc +creg +cres 
+	+crsm +csas +csca +cscs +csdf +csdh +csil +csmp +csms +csq +cssn +csta +cstf 
+	+csvm +cusd +fclass +gcap +gci +gmi +gmm +gmr +gsn +icf +ifc +ilrr +ipr 
+	+thrane +ws +xxx 
+	_ibalarm _iblth _ibnotify _ibtif _ibtinq _ierror _igps _ilog _imeter _inis 
+	_iotap _ipoint _isatcur _isatinfo _isatvis _isig _isleep _itcsi _itcso _itemp 
+	_itevent _itip _itisdn _itmsn _itmsnlist _itnat _itnmea _itsgluser _itwlan 
+	_itwlancc _itwlanf _itwlanmac _ixtream 
+----
+
+The list is also available line by line:
+
+[,source]
+----
+	AT+CLAC
+	ata 
+	atd 
+	ate 
+	ath 
+	ati 
+	atl 
+	atm 
+	atn 
+	atp 
+	atq 
+	ats 
+	att 
+	atv 
+	atx 
+	atz 
+	at&c 
+	at&d 
+	at&f 
+	at&k 
+	at&v 
+	at&w 
+	at+caap 
+	at+cacm 
+	at+caemlpp 
+	at+calm 
+	at+camm 
+	at+caoc 
+	at+cbc 
+	at+cbst 
+	at+ccfc 
+	at+cclk 
+	at+ccug 
+	at+ccwa 
+	at+ccwe 
+	at+cdip 
+	at+ceer 
+	at+cfcs 
+	at+cfun 
+	at+cgact 
+	at+cgatt 
+	at+cgclass 
+	at+cgcmod 
+	at+cgdata 
+	at+cgdcont 
+	at+cgdscont 
+	at+cgeqmin 
+	at+cgeqneg 
+	at+cgeqreq 
+	at+cgerep 
+	at+cgmi 
+	at+cgmm 
+	at+cgmr 
+	at+cgpaddr 
+	at+cgqmin 
+	at+cgqreq 
+	at+cgreg 
+	at+cgsms 
+	at+cgsn 
+	at+cgtft 
+	at+chld 
+	at+chup 
+	at+cimi 
+	at+cind 
+	at+clac 
+	at+clan 
+	at+clcc 
+	at+clck 
+	at+clip 
+	at+clir 
+	at+cmar 
+	at+cmec 
+	at+cmee 
+	at+cmer 
+	at+cmgc 
+	at+cmgd 
+	at+cmgf 
+	at+cmgl 
+	at+cmgr 
+	at+cmgs 
+	at+cmgw 
+	at+cmod 
+	at+cmss 
+	at+cmut 
+	at+cnmi 
+	at+cnum 
+	at+colp 
+	at+copn 
+	at+cops 
+	at+cpas 
+	at+cpbf 
+	at+cpbr 
+	at+cpbs 
+	at+cpbw 
+	at+cpin 
+	at+cpls 
+	at+cpms 
+	at+cpol 
+	at+cpps 
+	at+cpuc 
+	at+cpwd 
+	at+cr 
+	at+crc 
+	at+creg 
+	at+cres 
+	at+crsm 
+	at+csas 
+	at+csca 
+	at+cscs 
+	at+csdf 
+	at+csdh 
+	at+csil 
+	at+csmp 
+	at+csms 
+	at+csq 
+	at+cssn 
+	at+csta
+	at+cstf
+	at+csvm
+	at+cusd
+	at+fclass
+	at+gcap
+	at+gci
+	at+gmi
+	at+gmm
+	at+gmr
+	at+gsn
+	at+icf
+	at+ifc
+	at+ilrr
+	at+ipr
+	at+thrane
+	at+ws
+	at+xxx
+	at_ibalarm
+	at_iblth
+	at_ibnotify
+	at_ibtif
+	at_ibtinq
+	at_ierror
+	at_igps
+	at_ilog
+	at_imeter
+	at_inis
+	at_iotap
+	at_ipoint
+	at_isatcur
+	at_isatinfo
+	at_isatvis
+	at_isig
+	at_isleep
+	at_itcsi
+	at_itcso
+	at_itemp
+	at_itevent
+	at_itip
+	at_itisdn
+	at_itmsn
+	at_itmsnlist
+	at_itnat
+	at_itnmea
+	at_itsgluser
+	at_itwlan
+	at_itwlancc
+	at_itwlanf
+	at_itwlanmac
+	at_ixtream
+----
+
+## Firmware exploration
+
+Binwalk will help to uncompress firmware version 3.0.9:
+
+[,source]
+----
+	$ binwalk -e E700_ver309.dl
+
+	DECIMAL       HEXADECIMAL     DESCRIPTION
+	--------------------------------------------------------------------------------
+	0             0x0             POSIX tar archive (GNU)
+	
+	$ ls
+	E700_ver309.dl   _E700_ver309.dl.extracted   e700_ver309.zip  'Tech Note E700_SW_V309_RevA.pdf'
+
+	$ file _E700_ver309.dl.extracted/*
+	_E700_ver309.dl.extracted/0.tar:           POSIX tar archive (GNU)
+	_E700_ver309.dl.extracted/avr_ant.bin:     data
+	_E700_ver309.dl.extracted/avr_ant_v19.bin: data
+	_E700_ver309.dl.extracted/avr_ant_v21.bin: data
+	_E700_ver309.dl.extracted/dsp:             directory
+	_E700_ver309.dl.extracted/lua:             directory
+	_E700_ver309.dl.extracted/MAIN_CPU:        data
+	_E700_ver309.dl.extracted/manifest:        ASCII text
+	_E700_ver309.dl.extracted/psu_pro.bin:     data
+----
+
+- Binwalk doesn't get anything useful on link:avr_ant.bin.txt[avr_ant.bin], link:avr_ant_v19.bin.txt[avr_ant_v19.bin], link:avr_ant_v21.bin.txt[avr_ant_v21.bin] or even psu_pro.bin (`strings` output available on each link).
+- `0.tar` contains all the files from the folder.
+- `manifest` is a checksum
+
+The `lua` forlder contains some useful files used on the system:
+
+[,console]
+----
+	$ ls lua/*
+	lua/bin:
+	compat-5.1.lua  xavante-start.lua
+
+	lua/lib:
+	cgilua      copas.lua     debug_info.lua       export_config.lua  ltn12.lua  reboot_terminal.lua  socket      stable.lua        venv.lua
+	cgilua.lua  coxpcall.lua  export_call_log.lua  import_config.lua  mime.lua   sajax.lua            socket.lua  upload_image.lua  xavante
+
+	lua/web:
+	administration.lua  batteryanimation.gif   corner.gif           french.lua      language.lua         mt_status_db.lua            profiles.lua            signal4.bmp         style3.css                     upload.lua
+	advanced.lua        batteryfill.gif        cug.lua              german.lua      leftarrow.gif        mt_status.lua               properties.lua          signal4.gif         system_type.lua                user_permissions.lua
+	alarmlist.lua       bg1.gif                db.lua               helpdesk.lua    leftfill.gif         mt_status_sajax.lua         remote_management.lua   signal5.gif         tracking.lua                   voip.lua
+	antenna.gif         bgan.bmp               discreteio_aero.lua  hld.gif         limits.lua           multivoice.lua              restricted_dialing.lua  signal6.gif         traffic_flow_filters.lua       voip_test.lua
+	atc_filter.lua      bgan-fill.jpg          discreteio_bdu.lua   home.lua        line.gif             network_classification.lua  rfsettings.lua          signal7.gif         TT-BTlogo-pos-small.gif        wlan_aero.lua
+	battery00.gif       bluetooth_devices.lua  discreteio.lua       horzline.gif    linehigh.gif         network_connections.lua     russian.lua             sim_lock.lua        TT-isdn-pos-small.gif          wlan_baseline.lua
+	battery100.gif      bluetooth.lua          dlna.gif             hpa.gif         link_monitoring.lua  network_devices.lua         safety_voice.lua        sim_pin.lua         tt-logo.bmp                    wlan_baseline_quatech.lua
+	battery10.gif       call_barring.lua       downarrow.gif        html.lua        localexchange.lua    network_user_groups.lua     sat_select.lua          sitemap.lua         TT-mail-closed-pos-small.gif   wlan.lua
+	battery20.gif       call_charges.lua       dts.lua              icons.lua       log_handling.lua     none.lua                    sbu.gif                 sms_activation.lua  TT-network-pos-small.gif       zones.gif
+	battery2.gif        call_forward.lua       dual_antenna.lua     index.lua       main.lua             optus_logo.png              sdu.gif                 sms.lua             TT-phone-onhook-pos-small.gif  zones.lua
+	battery30.gif       call_line_id.lua       e727_mode.lua        interfaces.lua  menu.lua             past.lua                    settings.lua            sort-down.gif       ttplotapplet.jar
+	battery40.gif       calls.lua              english.lua          intersect.gif   menupath.lua         pathfill2.bmp               signal0.gif             sort-up.gif         TT-structure-pos-small.gif
+	battery50.gif       calls_show.lua         eventlist.lua        isdn.lua        mobile_numbers.lua   phonebook.lua               signal1.gif             spanish.lua         TT-warning1-pos-small.gif
+	battery60.gif       call_waiting.lua       extended_status.lua  japanese.lua    move-down.gif        phonefax.lua                signal2.bmp             splitter.gif        TT-warning2-pos-small.gif
+	battery70.gif       chinese.lua            extsystems.lua       javascript      move-up.gif          pointing_mode.lp            signal2.gif             static_route.lua    TT-warning3-pos-small.gif
+	battery80.gif       cmu_acars.lua          feature_lock.lua     lang.lua        msg_settings.lua     portforwarding.lua          signal3.bmp             status.lua          TT-wlan-pos-small.gif
+	battery90.gif       cobham_logo.gif        flex.lua             langtest.lua    mt_diagnostic.lua    pppoe.lua                   signal3.gif             style2.css          uparrow.gif
+----
+
+`MAIN_CPU` file looks promising also. It's a compressed file which contains OS files, eCOS RTOS:
+
+[,console]
+----
+	$ binwalk -e MAIN_CPU
+
+	DECIMAL       HEXADECIMAL     DESCRIPTION
+	--------------------------------------------------------------------------------
+	104           0x68            gzip compressed data, maximum compression, has original file name: "tt3720.ah-3_09-0001-tt3720.bin", from Unix, last modified: 2015-09-04 07:05:54
+----
+
+Unfortunately binwalk is unable to extract the files contained in link:tt3720.ah-3_09-0001-tt3720.bin.txt[tt3720.ah-3_09-0001-tt3720.bin].

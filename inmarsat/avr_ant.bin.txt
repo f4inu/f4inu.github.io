@@ -1,0 +1,178 @@
+&_?O
+)_?O
+A0P@b@p@
+ @/A+B+C+9
+O/O?O
+-	)a
+D$U$f$w$
+I__O	
+`.w$
+/_?O
+L__O
+ /!p
+$60@8
+$60@
+ /!+
+l!0/
+O/O?O
+P/K=
+L__O
+K__O
+J__O
+._?O
+J__O
+._?O
+`/A/
+`/A/
+ /#p"
++ /$
+/#/0
+#P#p"
+E,U$
+!E/V/g/p
+CPCpD
+,#,3$
+P.f$c
+ D$J
+'N/B
+'N/P
+P.f$w$
+`@p@
++^?O
+/%/7/
+f$w$D$U$
+v @.|
+APP@
+@ /!+
+B/C+
+/_?O
+[/j/
+.U#2
+2, /!+
+!00@
+@ @0@
+psclock
+AVR: 
+Result: 
+Value: 
+Flash status: 
+Default: 
+unknown: 
+ant:/$ 
+ant (flash unlocked):/$ 
+EIRP# eirp
+    
+Freq# Adj.
+C -> 
+#  nT     Adj.   Gain
+EIRP# vhs
+** Command not allowed
+. Flash is locked.
+. MSIC busy.
+syntax: 
+* MSIC: 
+* FPGA: 
+* Bom:  
+* Date: 
+: 0x
+GPS setup: 
+GPS errors: 
+ -04
+** No.of MSIC write retries = 
+** Command failed
+ locked
+ unlocked
+Calib: -
+dBm, 
+Point1: -
+Point2: -
+Slope :  
+mV/dB
+Cut @ : -
+Burst counters: 
+ status: 
+ errors: 
+ overrun: 
+DAC 2: 0x
+DAC 3: 0x
+DAC 4: 0x
+Bearer: 
+EIRP: 
+Freq.: 
+Temp.: 
+watchdog
+** Calib. data 
+ not ok **
+*** Calib. data 
+ not ok ***
+help
+temp
+hpa0
+hpavon
+sleep
+hpa1
+hpa2
+hpatest
+inputdetect
+mpower
+<0|1|2>
+msic
+<adr> [<0.255>]
+portd
+<0..255>
+<0..15> [<0.255>]
+txack
+gpsgain
+gpsreset
+<0..31>
+beep
+<0..7>
+eirp
+<0..10> <val>
+freq
+<0..4> <val>
+lna_gain
+<41.0..53.0>
+<0..7> | <0..10> <val>
+<1..4>
+bias
+<1|2> <0..4095>
+<1..4> <0..4095>
+<5 characters>
+pcb_id
+<1..20 characters>
+ser_no
+state
+<0..3>
+flash
+lock
+<0|1> [<val>]
+power_calib
+<-1.0..-29.9>
+<0..2>
+burst
+cable_adj
+<9.0..15.0>
+power_table
+code
+<0..65535> [<0..255>]
+erase
+idle
+wake
+gpsstatus
+modem
+mtest
+status
+Apr 23 2007
+*******************
+* Explorer 700
+* HPA version 
+<0|1>
+x2u:
+x2s:
+x1d:
+x2d:
+*** Tx ABORTED ***
+Resume from Abort!
+					
+0123456789abcdefghijklmnopqrstuvwxyz

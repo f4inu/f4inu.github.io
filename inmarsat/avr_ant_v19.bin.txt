@@ -1,0 +1,146 @@
+&_?O
+)_?O
+A0P@b@p@
+@/A+B+C+9
+O/O?O
+-	)a
+D$U$f$w$
+F,U$A
+J__O	
+O/O?O
+ /#p"
++ /$
+P/K=
+L__O
+`/A/
+`/A/
+ /#p"
++ /$
+/#/0
+#P#p"
+E,U$
+E/V/g/p
+CPCpD
+,#,3$
+P.f$c
+'N/B
+'N/P
+P.f$w$
+`@p@
++^?O
+/%/7/
+f$w$D$U$
+APP@
+@ /!+
+B/C+
+/_?O
+[/j/
+.U#2
+2, /!+
+!00@
+@ @0@
+hpa2
+Calib: -
+dBm, 
+Point1: -
+Point2: -
+Slope :  
+mV/dB
+Cut @ : -
+Burst counters: 
+Modem status: 
+Modem errors: 
+Modem overrun: 
+AVR: 
+unknown: 
+ant:/$ 
+EIRP# eirp
+    
+Freq# Adj.
+C -> 
+#  nT     Adj.   Gain
+EIRP# vhs
+*** Command not allowed now
+syntax: 
+* MSIC: 
+* FPGA: 
+* Bom:  
+* Date: 
+HPA0: 
+HPAvon: 
+LNA: 
+Sleep: 
+MTx: 
+Att.: 
+ -04
+LNA gain: 
+*** No.of MSIC write retries = 
+ ***
+Bom: 
+PCB id.: 
+<1..20 characters>
+ant:/$ 
+help
+temp
+hpa0
+hpavon
+sleep
+hpa1
+psclock
+hpatest
+inputdetect
+mpower
+<0|1|2>
+msic
+<adr> [<0.255>]
+portd
+<0..255>
+<0..15> [<0.255>]
+txack
+gpsgain
+gpsreset
+<0..31>
+beep
+<0..7>
+eirp
+<0..10> <val>
+freq
+<0..4> <val>
+lna_gain
+<41.0..53.0>
+<0..7> | <0..10> <val>
+<1..4>
+bias
+<1|2> <0..4095>
+<1..4> <0..4095>
+<5 characters>
+pcb_id
+state
+<0..3>
+flash
+power_calib
+<-1.0..-29.9>
+watchdog
+<0..2>
+burst
+cable_adj
+<9.0..15.0>
+power_table
+code
+<0..65535> [<0..255>]
+erase
+idle
+wake
+gpsstatus
+modem
+mtest
+status
+Oct 19 2006
+*******************
+* Explorer 700
+* HPA version 
+<0|1>
+*** Tx ABORTED ***
+Resume from Abort!
+					
+0123456789abcdefghijklmnopqrstuvwxyz
