@@ -1,0 +1,26 @@
+# WSJT-X et FT8
+:toc:
+:stylesheet: ../boot-slate.css
+
+## Réception FT8 avec WSJT-X
+
+### Réception avec un SDR et GQRX
+
+Au niveau OS, rajouter une carte son de type loopback via alsa (`modprobe snd_aloop`) ou pulse (`pactl load-module module-loopback`) pour envoyer le son dessus.
+
+GQRX:: 
+* dans "Tools", activer "Remote control". Dans "Remote control settings", noter le port utilisé et autoriser l'ip sur laquelle tournera WSJT-X.
+* Dans l'audio output utiliser la carte son loopback créée plus tôt.
+
+WSJT-X::
+* Dans l'onglet "Radio" des paramètres, choisir 'Hamlib NET rigctl' et mettre "ip du gqrx:port" dans "Network esrver". 
+* Dans l'onglet "Audio", choisir la carte son input 'alsa_output.platform-snd_aloop.0.analog-stereo.monitor', et 'alsa_output.platform-snd_aloop.0.analog-stero' en output (ou n'importe quelle carte - il suffit d'en mettre une valide).
+
+
+### Lancer deux instances de WSJT-X en parallèle 
+
+Lancer WSJT-X avec l'option `'--rig-name=GQRX1'` afin de ne pas avoir de conflit de lock file.
+
+### Visualiser les contacts WSJT-X
+
+https://www.gridtracker.org/[Gridtracker] permet d'afficher une superbe carte en temps réel à la psk-reporter des contacts & signaux reçus.

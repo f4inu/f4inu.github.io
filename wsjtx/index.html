@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.20">
+<title>WSJT-X et FT8</title>
+<link rel="stylesheet" href="./../boot-slate.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>WSJT-X et FT8</h1>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_réception_ft8_avec_wsjt_x">Réception FT8 avec WSJT-X</a>
+<ul class="sectlevel2">
+<li><a href="#_réception_avec_un_sdr_et_gqrx">Réception avec un SDR et GQRX</a></li>
+<li><a href="#_lancer_deux_instances_de_wsjt_x_en_parallèle">Lancer deux instances de WSJT-X en parallèle</a></li>
+<li><a href="#_visualiser_les_contacts_wsjt_x">Visualiser les contacts WSJT-X</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_réception_ft8_avec_wsjt_x">Réception FT8 avec WSJT-X</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_réception_avec_un_sdr_et_gqrx">Réception avec un SDR et GQRX</h3>
+<div class="paragraph">
+<p>Au niveau OS, rajouter une carte son de type loopback via alsa (<code>modprobe snd_aloop</code>) ou pulse (<code>pactl load-module module-loopback</code>) pour envoyer le son dessus.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">GQRX</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>dans "Tools", activer "Remote control". Dans "Remote control settings", noter le port utilisé et autoriser l&#8217;ip sur laquelle tournera WSJT-X.</p>
+</li>
+<li>
+<p>Dans l&#8217;audio output utiliser la carte son loopback créée plus tôt.</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">WSJT-X</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p>Dans l&#8217;onglet "Radio" des paramètres, choisir 'Hamlib NET rigctl' et mettre "ip du gqrx:port" dans "Network esrver".</p>
+</li>
+<li>
+<p>Dans l&#8217;onglet "Audio", choisir la carte son input 'alsa_output.platform-snd_aloop.0.analog-stereo.monitor', et 'alsa_output.platform-snd_aloop.0.analog-stero' en output (ou n&#8217;importe quelle carte - il suffit d&#8217;en mettre une valide).</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_lancer_deux_instances_de_wsjt_x_en_parallèle">Lancer deux instances de WSJT-X en parallèle</h3>
+<div class="paragraph">
+<p>Lancer WSJT-X avec l&#8217;option <code>'--rig-name=GQRX1'</code> afin de ne pas avoir de conflit de lock file.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_visualiser_les_contacts_wsjt_x">Visualiser les contacts WSJT-X</h3>
+<div class="paragraph">
+<p><a href="https://www.gridtracker.org/">Gridtracker</a> permet d&#8217;afficher une superbe carte en temps réel à la psk-reporter des contacts &amp; signaux reçus.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2024-02-19 16:24:21 +0100
+</div>
+</div>
+</body>
+</html>
