@@ -1,4 +1,6 @@
 # Exploration d'un terminal Inmarsat BGAN Thrane & Thrane Explorer 700
+:stylesheet: ../stylesheet.css
+:toc:
 
 J'ai eu l'opportunité de récupérer il y a quelques années un terminal Inmarsat utilisé pour le traffic data et voix via le service BGAN.
 
