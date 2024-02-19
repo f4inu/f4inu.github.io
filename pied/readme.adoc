@@ -1,0 +1,22 @@
+# Antenna mast spike mount
+:toc:
+:stylesheet: ../stylesheet.css
+
+## Antenna mast lightweight mount
+
+Homebrew lightweight mast mount from scrap. A tube, a piece of angle iron and some rebar.
+
+.Crappy weld between tube and angle iron
+[link=20200926_221210.jpg]
+image::thumbs/20200926_221210.gif[]
+
+.Adjustment screws details
+[link=20200926_221303.jpg]
+image::thumbs/20200926_221303.gif[]
+
+.Overall view
+[link=20200926_221344.jpg]
+image::thumbs/20200926_221344.gif[]
+
+
+
