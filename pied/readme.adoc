@@ -1,5 +1,4 @@
 # Antenna mast spike mount
-:toc:
 :stylesheet: ../stylesheet.css
 
 ## Antenna mast lightweight mount
