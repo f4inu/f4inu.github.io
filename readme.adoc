@@ -1,8 +1,8 @@
 # F4INU ham radio projects and notes
-:toc:
-:stylesheet: stylesheet.css
 petrus <f4inu@tuta.io>
 12, 2024-02-15: Asciidoc rewrite
+:toc: left
+:stylesheet: ./boot-slate.css
 
 ## link:f4inu/[About me]
 Copy of my qrz.com page.
