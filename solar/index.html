@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.20">
+<title>Alimentation solaire</title>
+<link rel="stylesheet" href="./../boot-slate.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>Alimentation solaire</h1>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_utilisation_dun_panneau_solaire_portable_décathlon_50w">Utilisation d&#8217;un panneau solaire portable Décathlon 50w</a></li>
+<li><a href="#_caractéristiques_techniques_du_panneau">Caractéristiques techniques du panneau</a></li>
+<li><a href="#_utilisation_avec_le_controlleur_régulateur_dorigine">Utilisation avec le controlleur / régulateur d&#8217;origine</a></li>
+<li><a href="#_utilisation_avec_un_controlleur_de_charge_solaire_victron_smartsolar">Utilisation avec un controlleur de charge solaire Victron SmartSolar</a></li>
+<li><a href="#_utilisation_du_victron_en_déport_du_régulateur_dorigine">Utilisation du Victron en déport du régulateur d&#8217;origine</a></li>
+<li><a href="#_alimentation_dun_laptop_sdr_non_usb">Alimentation d&#8217;un laptop + sdr non-usb</a></li>
+<li><a href="#_images">Images</a></li>
+<li><a href="#_liens_ressources">Liens &amp; ressources</a></li>
+<li><a href="#_retour">retour</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_utilisation_dun_panneau_solaire_portable_décathlon_50w">Utilisation d&#8217;un panneau solaire portable Décathlon 50w</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>L&#8217;idée est d&#8217;avoir un panneau solaire qui sorte pas uniquement du 5v/usb(-c), pour pouvoir l&#8217;utiliser pour recharger des batteries 12/13.8v.</p>
+</div>
+<div class="paragraph">
+<p>Ici le panneau a un régulateur externe dont j&#8217;avais bon espoir qu&#8217;il soit utilisable sans ce régulateur.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_caractéristiques_techniques_du_panneau">Caractéristiques techniques du panneau</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Tension à vide du panneau : 22v.</p>
+</li>
+<li>
+<p>Tension annoncée (sortie DC?) : 18v, 2.8A</p>
+</li>
+<li>
+<p>Brochage Anderson Powerpole en sortie de panneau (pas de mc4) au standard OM, ainsi le rendant compatibles avec cables et portes-fusibles du shack.</p>
+</li>
+<li>
+<p>L&#8217;intensité disponible sur les ports USB n&#8217;est pas indiquée et je ne dispose pas de quoi le mesurer.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_utilisation_avec_le_controlleur_régulateur_dorigine">Utilisation avec le controlleur / régulateur d&#8217;origine</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Bon ben ça marche, usb, usb-c, pas grand chose à dire. La sortie DC fournit 18-20v environ, en théorie pour charger une batterie également vendue par Décathlon.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-console" data-lang="console">         Panneau solaire
+     ┌──────────┬──────────┐
+     │          │          │
+     │          │          │
+     │          │          │           Contrôleur
+     │          │          │            d'origine
+     │          │          │            ┌───────┐   Sortie
+     │          │          ├────────────┤       ├─── 18v
+     │          │          │            └┬─┬──┬─┘    2.8A
+     │          │          │             │ │  │
+     │          │          │           Sorties USB
+     │          │          │
+     │          │          │
+     └──────────┴──────────┘</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_utilisation_avec_un_controlleur_de_charge_solaire_victron_smartsolar">Utilisation avec un controlleur de charge solaire Victron SmartSolar</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>41w mesurés en sortie de panneau, ~17v 2.4A, charge de la batterie Pb (vrsla) sous 13.6v 3A.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-console" data-lang="console">         Panneau solaire
+      ┌──────────┬──────────┐        Victron
+      │          │          │        ┌─────┐
+      │          │          │        │ 75  │
+      │          │          │        │  15 │
+      │          │          │        └┬─┬─┬┘
+      │          │          │  Sortie │ │ │  Sortie
+      │          │          ├───18v───┘ │ └──13v──
+      │          │          │           │
+      │          │          │         ┌─┴──────┐
+      │          │          │         │ Batt   │
+      │          │          │         │  VRSLA │
+      │          │          │         │12v 20Ah│
+      └──────────┴──────────┘         └────────┘</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_utilisation_du_victron_en_déport_du_régulateur_dorigine">Utilisation du Victron en déport du régulateur d&#8217;origine</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A confirmer que cela fonctionne bien, je n&#8217;ai fait que des tests rapides.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-console" data-lang="console">        Panneau solaire
+     ┌──────────┬──────────┐                   Victron
+     │          │          │                   ┌─────┐
+     │          │          │                   │ 75  │
+     │          │          │  Contrôleur       │  15 │
+     │          │          │   d'origine       └┬─┬─┬┘
+     │          │          │   ┌────────┐Sortie │ │ │  Sortie
+     │          │          ├───┤        ├─18v───┘ │ └──13v──
+     │          │          │   └┬─┬──┬──┘         │
+     │          │          │    │ │  │          ┌─┴──────┐
+     │          │          │  Sorties USB       │ Batt   │
+     │          │          │                    │  VRSLA │
+     │          │          │                    │12v 20Ah│
+     └──────────┴──────────┘                    └────────┘</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_alimentation_dun_laptop_sdr_non_usb">Alimentation d&#8217;un laptop + sdr non-usb</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>L&#8217;idée est d&#8217;alimenter un sdr depuis un port USB-C via un cable power-delivery afin de fournir du 12v et ainsi profiter de la batterie de l&#8217;ordi portable.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-console" data-lang="console">         Panneau solaire
+     ┌──────────┬──────────┐
+     │          │          │
+     │          │          │
+     │          │          │           Contrôleur
+     │          │          │            d'origine
+     │          │          │            ┌───────┐
+     │          │          ├─────18v────┤       │
+     │          │          │            └┬─┬──┬─┘
+     │          │          │                  │ USB-C PD
+     │          │          │             ┌────┴────┐
+     │          │          │             │         │       ┌──────┐
+     │          │          │             │ LAPTOP  ├──────►│ SDR  │
+     └──────────┴──────────┘             │         │   PD  └──────┘
+                                         └─────────┘</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_images">Images</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<a class="image" href="panneau-solaire-50-watts-pour-le-camping-0.jpg"><img src="thumbs/panneau-solaire-50-watts-pour-le-camping-0.gif" alt="panneau solaire 50 watts pour le camping 0"></a>
+</div>
+<div class="title">Figure 1. Vue d&#8217;ensemble</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="panneau-solaire-50-watts-pour-le-camping-1.jpg"><img src="thumbs/panneau-solaire-50-watts-pour-le-camping-1.gif" alt="panneau solaire 50 watts pour le camping 1"></a>
+</div>
+<div class="title">Figure 2. Panneau replié</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="panneau-solaire-50-watts-pour-le-camping-2.jpg"><img src="thumbs/panneau-solaire-50-watts-pour-le-camping-2.gif" alt="panneau solaire 50 watts pour le camping 2"></a>
+</div>
+<div class="title">Figure 3. Panneau déplié</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="panneau-solaire-50-watts-pour-le-camping-3.jpg"><img src="thumbs/panneau-solaire-50-watts-pour-le-camping-3.gif" alt="panneau solaire 50 watts pour le camping 3"></a>
+</div>
+<div class="title">Figure 4. Focus sur le controlleur</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="panneau-solaire-50-watts-pour-le-camping-4.jpg"><img src="thumbs/panneau-solaire-50-watts-pour-le-camping-4.gif" alt="panneau solaire 50 watts pour le camping 4"></a>
+</div>
+<div class="title">Figure 5. Vue de l&#8217;arrière</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<a class="image" href="panneau-solaire-50-watts-pour-le-camping-5.jpg"><img src="thumbs/panneau-solaire-50-watts-pour-le-camping-5.gif" alt="panneau solaire 50 watts pour le camping 5"></a>
+</div>
+<div class="title">Figure 6. Pochette de rangement</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_liens_ressources">Liens &amp; ressources</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.decathlon.fr/p/panneau-solaire-50-watts-pour-le-camping/_/R-p-334640">Listing produit sur decathlon.fr</a></p>
+</li>
+<li>
+<p><a href="https://oh8stn.org/blog/2022/08/21/victron-75-15-mppt-rfi-problem-on-hf-receiver/">Test et suppression du QRM sur Victron 75/15 par Julian OH8STN</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_retour"><a href="../">retour</a></h2>
+<div class="sectionbody">
+
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2024-02-20 10:37:24 +0100
+</div>
+</div>
+</body>
+</html>
