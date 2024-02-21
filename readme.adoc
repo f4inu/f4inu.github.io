@@ -40,10 +40,6 @@ Dipole filaire replié entre halo et cobweb
 2022-08-15
 Alimentation solaire
 
-## link:dowap/[DOWaP]
-2022-09-19
-Days Operating Without any Power
-
 ## link:icom/[Icom]
 2022-11-06
 Bidouilles pour radios Icom

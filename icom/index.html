@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.20">
+<title>icom tips</title>
+<link rel="stylesheet" href="./../boot-slate.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>icom tips</h1>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_bricoles_diverses_sur_lutilisation_des_radios_icom">Bricoles diverses sur l&#8217;utilisation des radios Icom</a></li>
+<li><a href="#_emulateur_de_tuner">Emulateur de tuner</a></li>
+<li><a href="#_utilisation_de_la_prise_tuner_pour_alimenter_un_atu100">Utilisation de la prise tuner pour alimenter un ATU100</a></li>
+<li><a href="#_liens">Liens</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_bricoles_diverses_sur_lutilisation_des_radios_icom">Bricoles diverses sur l&#8217;utilisation des radios Icom</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Quelques bricoles que j&#8217;ai faites ou que j&#8217;envisage de faire pour améliorer l&#8217;utilisation de mes radios icom.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_emulateur_de_tuner">Emulateur de tuner</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Ce circuit permet de faire croire à un icom qu&#8217;il y a une boite d&#8217;accord connectée à la radio. Lors de l&#8217;appui sur le bouton 'tuner' de la radio elle passe en CW et génère une porteuse de 10w pendant environ 10 secondes.</p>
+</div>
+<div class="paragraph">
+<p>Au début j&#8217;ai utilisé R=10k et C=47µF, cela génerait une porteuse pendant environ 3 à 4 secondes, ce qui était parfois trop court pour la boite d&#8217;accord.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-console" data-lang="console">   &lt; TKEY TSTR 13.8v GND ]
+      │    │     │
+      └┬───┘     │
+       │         │
+       │ ┌─────┐ │
+       ├─┤ 220k├─┤
+       │ └─────┘ │
+       │         │
+       │   │ │   │
+       └───┤ ├───┘
+           │ │
+	  470µF</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_utilisation_de_la_prise_tuner_pour_alimenter_un_atu100">Utilisation de la prise tuner pour alimenter un ATU100</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Dérivation du circuit précédent pour se ponter sur le +vcc pour alimenter un tuner atu100.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-console" data-lang="console"> &lt; TKEY TSTR 13.8v GND ]
+     │    │     │   │
+     └┬───┘     │   │
+      │         │   │
+      │ ┌─────┐ │   │
+      ├─┤ 220k├─┤   │
+      │ └─────┘ │   │
+      │         │   │
+      │   │ │   │   │
+      └───┤ ├───┤   │
+          │ │   │   │
+	        │   │
+         470µF  │   │
+	        │   │
+		│   │
+		│   │</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_liens">Liens</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://www.hampedia.net/icom/ic-706-10-watt-tune-modification-an-icom-ic706-tune-trigger.php">"Hampedia IC-706 10w tune trigger"</a></p>
+</li>
+</ul>
+</div>
+<h2 id="_retour" class="discrete"><a href="../">retour</a></h2>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2024-02-21 15:41:49 +0100
+</div>
+</div>
+</body>
+</html>

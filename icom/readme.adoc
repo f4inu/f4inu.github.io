@@ -1,0 +1,59 @@
+# icom tips
+:toc:
+:stylesheet: ../boot-slate.css
+
+== Bricoles diverses sur l'utilisation des radios Icom
+
+Quelques bricoles que j'ai faites ou que j'envisage de faire pour améliorer l'utilisation de mes radios icom.
+
+== Emulateur de tuner
+
+Ce circuit permet de faire croire à un icom qu'il y a une boite d'accord connectée à la radio. Lors de l'appui sur le bouton 'tuner' de la radio elle passe en CW et génère une porteuse de 10w pendant environ 10 secondes.
+
+Au début j'ai utilisé R=10k et C=47µF, cela génerait une porteuse pendant environ 3 à 4 secondes, ce qui était parfois trop court pour la boite d'accord.
+[,console]
+----
+
+   < TKEY TSTR 13.8v GND ]
+      │    │     │
+      └┬───┘     │
+       │         │
+       │ ┌─────┐ │
+       ├─┤ 220k├─┤
+       │ └─────┘ │
+       │         │
+       │   │ │   │
+       └───┤ ├───┘
+           │ │
+	  470µF
+----
+
+== Utilisation de la prise tuner pour alimenter un ATU100
+
+Dérivation du circuit précédent pour se ponter sur le +vcc pour alimenter un tuner atu100.
+[,console]
+----
+ < TKEY TSTR 13.8v GND ]
+     │    │     │   │
+     └┬───┘     │   │
+      │         │   │
+      │ ┌─────┐ │   │
+      ├─┤ 220k├─┤   │
+      │ └─────┘ │   │
+      │         │   │
+      │   │ │   │   │
+      └───┤ ├───┤   │
+          │ │   │   │
+	        │   │
+         470µF  │   │
+	        │   │
+		│   │
+		│   │
+----
+
+== Liens
+* http://www.hampedia.net/icom/ic-706-10-watt-tune-modification-an-icom-ic706-tune-trigger.php["Hampedia IC-706 10w tune trigger"]
+
+[discrete]
+== link:../[retour]
+
