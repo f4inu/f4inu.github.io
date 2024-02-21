@@ -44,6 +44,6 @@ Alimentation solaire
 2022-11-06
 Bidouilles pour radios Icom
 
-## link:anytone/[Anytone PTT]
+## link:https://github.com/f4inu/anytone-ptt/[Anytone PTT]
 2023-03-27
 Utilisation d'un bouton Bluetooth PTT Anytone BP-02 avec un ordi
